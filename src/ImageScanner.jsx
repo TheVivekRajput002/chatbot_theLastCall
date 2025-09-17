@@ -54,19 +54,6 @@ const ImageScanner = () => {
           />
         )}
       </div>
-      
-      <div className="controls mb-4 flex items-center justify-center gap-2">
-        <input
-          type="checkbox"
-          id="mirror-checkbox"
-          checked={mirrored}
-          onChange={(e) => setMirrored(e.target.checked)}
-          className="w-4 h-4"
-        />
-        <label htmlFor="mirror-checkbox" className="text-sm font-medium">
-          Mirror
-        </label>
-      </div>
 
       <div className="btn-container flex justify-center gap-4">
         {imgSrc ? (
