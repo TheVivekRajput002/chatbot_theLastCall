@@ -3,13 +3,21 @@ import Webcam from 'react-webcam';
 
 const ImageScanner = () => {
   const webcamRef = useRef(null);
-  const [imgSrc, setImgSrc] = useState(null);  const [image_captured, setImage_captured] = useState(null); // New variable to store captured image
+  const [imgSrc, setImgSrc] = useState(null);
+  const [image_captured, setImage_captured] = useState(null); // New variable to store captured image
+  const [mirrored, setMirrored] = useState(false);
+  const [facingMode, setFacingMode] = useState("environment"); // Track camera facing mode
 
-  // Video constraints to use back camera
+  // Video constraints with dynamic facing mode
   const videoConstraints = {
     width: 600,
     height: 600,
-    facingMode: "environment" // This requests the back camera
+    facingMode: facingMode // Dynamic camera selection
+  };
+
+  // Function to switch camera
+  const switchCamera = () => {
+    setFacingMode(prevMode => prevMode === "environment" ? "user" : "environment");
   };
 
   const capture = useCallback(() => {
@@ -38,12 +46,26 @@ const ImageScanner = () => {
             height={600}
             width={600}
             ref={webcamRef}
+            mirrored={mirrored}
             screenshotFormat="image/jpeg"
             screenshotQuality={0.8}
             videoConstraints={videoConstraints}
             className="w-full max-w-lg mx-auto rounded-lg shadow-lg"
           />
         )}
+      </div>
+      
+      <div className="controls mb-4 flex items-center justify-center gap-2">
+        <input
+          type="checkbox"
+          id="mirror-checkbox"
+          checked={mirrored}
+          onChange={(e) => setMirrored(e.target.checked)}
+          className="w-4 h-4"
+        />
+        <label htmlFor="mirror-checkbox" className="text-sm font-medium">
+          Mirror
+        </label>
       </div>
 
       <div className="btn-container flex justify-center gap-4">
@@ -55,12 +77,20 @@ const ImageScanner = () => {
             Retake photo
           </button>
         ) : (
-          <button 
-            onClick={capture}
-            className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
-          >
-            Capture photo
-          </button>
+          <>
+            <button 
+              onClick={capture}
+              className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
+            >
+              Capture photo
+            </button>
+            <button 
+              onClick={switchCamera}
+              className="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-colors"
+            >
+              {facingMode === "environment" ? "Switch to Front" : "Switch to Back"}
+            </button>
+          </>
         )}
       </div>
 
@@ -76,6 +106,7 @@ const ImageScanner = () => {
     </div>
   );
 };
+
 
 
 export default ImageScanner;
