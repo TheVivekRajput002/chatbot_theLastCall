@@ -1,6 +1,7 @@
 import Micc from './Micc'
 import './App.css'
 import ImageScanner from './ImageScanner'
+import VoiceChatbot from './chatbot'
 
 function App() {
 
@@ -8,7 +9,8 @@ function App() {
   return (
     <>
     {/* <Micc /> */}
-    <ImageScanner />
+    {/* <ImageScanner /> */}
+    < VoiceChatbot />
 
     </>
   )
