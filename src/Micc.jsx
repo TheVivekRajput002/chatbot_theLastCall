@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Mic } from 'lucide-react';
 import recordingAnimation from './assets/recording-animation.webm'
-import static_micAnimation_img from './assets/image.png'
 
 const Micc = () => {
   // State to track if GIF animation is active
