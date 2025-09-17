@@ -4,7 +4,6 @@ import Webcam from 'react-webcam';
 const ImageScanner = () => {
   const webcamRef = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);  const [image_captured, setImage_captured] = useState(null); // New variable to store captured image
-  const [mirrored, setMirrored] = useState(false);
 
   // Video constraints to use back camera
   const videoConstraints = {
@@ -39,26 +38,12 @@ const ImageScanner = () => {
             height={600}
             width={600}
             ref={webcamRef}
-            mirrored={mirrored}
             screenshotFormat="image/jpeg"
             screenshotQuality={0.8}
             videoConstraints={videoConstraints}
             className="w-full max-w-lg mx-auto rounded-lg shadow-lg"
           />
         )}
-      </div>
-      
-      <div className="controls mb-4 flex items-center justify-center gap-2">
-        <input
-          type="checkbox"
-          id="mirror-checkbox"
-          checked={mirrored}
-          onChange={(e) => setMirrored(e.target.checked)}
-          className="w-4 h-4"
-        />
-        <label htmlFor="mirror-checkbox" className="text-sm font-medium">
-          Mirror
-        </label>
       </div>
 
       <div className="btn-container flex justify-center gap-4">
